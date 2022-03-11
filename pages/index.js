@@ -14,7 +14,7 @@ export default function Home() {
       <main className="flex items-center justify-center w-full h-screen">
         <div>
           <h1 className="text-6xl font-bold"><a href="https://dsolutions.mn/" target="_blank" className="text-blue-500 no-underline">Diverse</a> ERC-20 Faucets</h1>
-          <p className="mt-5 font-light text-center text-md"> Available Faucet Networks : Polygon Mumbai </p>
+          <p className="py-6 font-light text-center text-md">Available Faucet Networks</p>
         </div>
       </main>
 
