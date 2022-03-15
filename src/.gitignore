@@ -6,11 +6,11 @@
 .pnp.js
 
 # testing
-/src/coverage
+coverage
 
 # next.js
-/src/.next/
-/src/out/
+.next/
+out/
 
 # production
 /build

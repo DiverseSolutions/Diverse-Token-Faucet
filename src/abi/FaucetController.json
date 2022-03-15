@@ -1,0 +1,10 @@
+[
+  "constructor()",
+  "event OwnerUpdated(address indexed,address indexed)",
+  "event TokenRedeemed(address indexed,uint256,bool)",
+  "function getFaucetEthBalance() view returns (uint256)",
+  "function getTokenFund(address) view returns (uint256)",
+  "function owner() view returns (address)",
+  "function redeemToken(address,address,uint256) returns (bool)",
+  "function setOwner(address) returns (address)"
+]

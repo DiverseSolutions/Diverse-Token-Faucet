@@ -31,7 +31,7 @@ export default function Navigation({ networks }) {
         </div>
         <div className="flex-none">
           <ul className="p-0 font-semibold menu menu-horizontal rounded-box">
-            <li tabIndex="0" className="mr-5">
+            <li tabIndex="0" className="z-10 mr-5">
               <a>
                 Networks
                 <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
