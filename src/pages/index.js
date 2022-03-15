@@ -28,7 +28,11 @@ export default function Home() {
     <>
       <div className="flex items-center justify-center h-screen">
         <div className="w-10/12 grid gap-20 grid-cols-3 justify-items-center grid-rows-1">
-          { tokens.map((i) => <TokenCard token={i} faucetContract={faucetContract} faucetSigner={faucetSigner} /> )  }
+          { tokens.map((i,k) => (
+            <div key={k}>
+              <TokenCard token={i} faucetContract={faucetContract} faucetSigner={faucetSigner} />
+            </div>
+            ))  }
         </div>
       </div>
     </>
@@ -62,31 +66,31 @@ function TokenCard({ token , faucetContract, faucetSigner }){
 
   return (
     <>
-      <div class="card w-96 bg-base-100 shadow-xl">
-        <figure class="px-10 pt-10">
+      <div className="shadow-xl card w-96 bg-base-100">
+        <figure className="px-10 pt-10">
           <Image src={token.imgUrl} alt="token_img" width={"304"} height={"304"}/>
         </figure>
-        <div class="card-body items-center text-center">
-          <div class="card-actions">
-            <label for={`${token.name}-modal`} class="btn btn-outline btn-wide modal-button">{token.name} Faucet</label>
+        <div className="items-center text-center card-body">
+          <div className="card-actions">
+            <label htmlFor={`${token.name}-modal`} className="btn btn-outline btn-wide modal-button">{token.name} Faucet</label>
           </div>
         </div>
       </div>
 
-      <input type="checkbox" id={`${token.name}-modal`} class="modal-toggle" />
+      <input type="checkbox" id={`${token.name}-modal`} className="modal-toggle" />
 
-      <div class="modal">
-        <div class="modal-box relative">
-          <label for={`${token.name}-modal`} onClick={() => { setTokenFundFromContract() }} class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+      <div className="modal">
+        <div className="relative modal-box">
+          <label htmlFor={`${token.name}-modal`} onClick={() => { setTokenFundFromContract() }} className="absolute btn btn-sm btn-circle right-2 top-2">✕</label>
           <div className="text-center">
-            <p class="pt-8 text-xl">Faucet Fund : {fund}</p>
-            <p class="pt-1 pb-6 text-sm text-xl font-light">Token - {token.address}</p>
-            <button class="btn btn-primary btn-wide" onClick={() => { redeem("100") }}>100 {token.name}</button>
-            <button class="btn btn-secondary btn-wide my-4" onClick={() => { redeem("500") }}>500 {token.name}</button>
-            <button class="btn btn-accent btn-wide" onClick={() => { redeem("1000") }}>1'000 {token.name}</button>
-            <button class="btn btn-info btn-outline btn-wide my-4" onClick={() => { redeem("1500") }}>1'500 {token.name}</button>
-            <button class="btn btn-warning btn-outline btn-wide" onClick={() => { redeem("2000") }}>2'000 {token.name}</button>
-            <a href={token.addTokenLink} target="_blank" class="btn btn-error text-white btn-wide my-4">Add To Metamask</a>
+            <p className="pt-8 text-xl">Faucet Fund : {fund}</p>
+            <p className="pt-1 pb-6 text-sm text-xl font-light">Token - {token.address}</p>
+            <button className="btn btn-primary btn-wide" onClick={() => { redeem("100") }}>100 {token.name}</button>
+            <button className="my-4 btn btn-secondary btn-wide" onClick={() => { redeem("500") }}>500 {token.name}</button>
+            <button className="btn btn-accent btn-wide" onClick={() => { redeem("1000") }}>1'000 {token.name}</button>
+            <button className="my-4 btn btn-info btn-outline btn-wide" onClick={() => { redeem("1500") }}>1'500 {token.name}</button>
+            <button className="btn btn-warning btn-outline btn-wide" onClick={() => { redeem("2000") }}>2'000 {token.name}</button>
+            <a href={token.addTokenLink} target="_blank" className="my-4 text-white btn btn-error btn-wide">Add To Metamask</a>
           </div>
         </div>
       </div>

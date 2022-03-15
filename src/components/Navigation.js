@@ -49,7 +49,6 @@ export default function Navigation({ networks }) {
 }
 
 function NetworkItem(item,key){
-  if (typeof window !== "undefined") {
     return (
       <li key={key} className={`${item.disabled ? 'disabled' : ''}`}>
         <a className={`${item.selected && "active"}`}>
@@ -58,9 +57,6 @@ function NetworkItem(item,key){
         </a>
       </li>
     )
-  }else{
-    return ('')
-  }
 }
 
 
