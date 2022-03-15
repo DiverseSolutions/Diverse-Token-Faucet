@@ -1,18 +1,24 @@
 import React from 'react'
 import { useHaveMetamask,useMetamaskConnect } from 'diverse-metamask-hooks'
 
-import polygonIcon from '../assets/polygon_icon.png';
-import ethereumIcon from '../assets/ethereum_icon.png';
 import Image from 'next/image';
 
 
-export default function Navigation() {
-  const [haveMetamask,checkBrowserHasMetamask] = useHaveMetamask();
 
-  function connect(){
+export default function Navigation({ networks }) {
+  const [haveMetamask,checkBrowserHasMetamask] = useHaveMetamask();
+  const [accounts,connect] = useMetamaskConnect();
+
+  function checkMetamaskAndConnect(){
     if(!haveMetamask){
       if (typeof window !== "undefined") {
         checkBrowserHasMetamask()
+      }
+    }
+
+    if(accounts.length == 0){
+      if (typeof window !== "undefined") {
+        connect()
       }
     }
   }
@@ -25,49 +31,36 @@ export default function Navigation() {
         </div>
         <div className="flex-none">
           <ul className="p-0 font-semibold menu menu-horizontal rounded-box">
-            <li tabIndex="0" className="">
+            <li tabIndex="0" className="mr-5">
               <a>
                 Networks
                 <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
               </a>
-              <ul className="p-2 w-40 bg-base-200">
-                <li className="disabled">
-                  <a>
-                    <Image src={ethereumIcon} width={20} height={20} alt="ethereum_icon" />
-                    Rinkeby
-                  </a>
-                </li>
-                <li className="disabled">
-                  <a>
-                    <Image src={ethereumIcon} width={20} height={20} alt="ethereum_icon" />
-                    Goerli
-                  </a>
-                </li>
-                <li className="disabled">
-                  <a>
-                    <Image src={ethereumIcon} width={20} height={20} alt="ethereum_icon" />
-                    Ropsten
-                  </a>
-                </li>
-                <li className="disabled">
-                  <a>
-                    <Image src={ethereumIcon} width={20} height={20} alt="ethereum_icon" />
-                    Kovan
-                  </a>
-                </li>
-                <li className="">
-                  <a>  
-                    <Image src={polygonIcon} width={20} height={20} alt="polygon_icon" />
-                    Mumbai
-                  </a>
-                </li>
+              <ul className="w-40 p-2 -right-3 bg-base-200">
+                { networks.map((i,k) => NetworkItem(i,k)) }
               </ul>
             </li>
-            <li><a onClick={connect()} className="text-blue-500">{haveMetamask ? "Connected" : "Not Connected"  }</a></li>
+            <li><a onClick={() => { checkMetamaskAndConnect() }} className={`text-blue-500 btn btn-outline ${accounts.length > 0 ? 'btn-disabled' : ''}`}>{haveMetamask & accounts.length > 0 ? `${accounts[0].substring(0,12)}...` : "Connect"  }</a></li>
           </ul>
         </div>
       </div>
     </>
   )
 }
+
+function NetworkItem(item,key){
+  if (typeof window !== "undefined") {
+    return (
+      <li key={key} className={`${item.disabled ? 'disabled' : ''}`}>
+        <a className={`${item.selected && "active"}`}>
+          { !item.hideImg && ( <Image src={item.img} width={20} height={20} alt="network_icon" /> ) }
+          { item.name } 
+        </a>
+      </li>
+    )
+  }else{
+    return ('')
+  }
+}
+
 
