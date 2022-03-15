@@ -1,4 +1,4 @@
-import {useEffect,useMemo} from 'react';
+import {useEffect,useState} from 'react';
 
 import '../styles/globals.css'
 import Head from 'next/head'
@@ -14,23 +14,33 @@ import { useHaveMetamask,useMetamaskConnect } from 'diverse-metamask-hooks'
 
 function MyApp({ Component, pageProps }) {
   const [haveMetamask,checkBrowserHasMetamask] = useHaveMetamask();
-  const network = useMemo(() => haveMetamask == true ? networks.find((i) => i.chainId == window.ethereum.networkVersion) : networks.find((i) => i.chainId == -1), [haveMetamask]);
+  const [networks, setNetworks] = useState(NETWORKS)
+  const [network, setNetwork] = useState(NETWORKS[0])
+
 
 
   useEffect(() => {
-    if(haveMetamask){
-      if (typeof window !== "undefined") {
-        let foundNetwork = networks.find((i) => i.chainId == window.ethereum.networkVersion)
+    updateNetwork()
+  }, [haveMetamask])
 
-        if(foundNetwork != undefined){
-          foundNetwork.selected = true
-        }else{
-          let notSupportedNetwork = networks.find((i) => i.chainId == -1)
-          notSupportedNetwork.selected = true
+  function updateNetwork(){
+      if(haveMetamask){
+        if (typeof window !== "undefined") {
+          let foundNetwork = networks.find((i) => i.chainId == window.ethereum.networkVersion)
+          networks.map((i) => { i.selected = false })
+
+          if(foundNetwork != undefined){
+            foundNetwork.selected = true
+            setNetwork(foundNetwork)
+          }else{
+            let notSupportedNetwork = networks.find((i) => i.chainId == -1)
+            notSupportedNetwork.selected = true
+            setNetwork(notSupportedNetwork)
+          }
+
         }
       }
-    }
-  }, [haveMetamask])
+  }
 
   return (
     <>
@@ -42,8 +52,9 @@ function MyApp({ Component, pageProps }) {
       { network != undefined && network.chainId != -1 ? (
         <Component {...pageProps} />
       ) : (
-        <div className="flex items-center justify-center h-screen">
-          No Metamask Or Please Connect To Polygon Mumbai and Refresh The Browser :(
+        <div className="flex flex-col items-center justify-center h-screen">
+          <h1>No Metamask Or Please Connect To Polygon Mumbai and Refresh The Browser :(</h1>
+          <button onClick={() => { updateNetwork() }} className="mt-4 btn btn-primary btn-wide">Retry</button>
         </div>
       )}
       <Footer />
@@ -51,7 +62,15 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-let networks = [
+let NETWORKS = [
+  {
+    name: 'Not Supported',
+    img: polygonIcon,
+    chainId: -1,
+    disabled: false,
+    selected: false,
+    hideImg: true,
+  },
   {
     name: 'Ropsten',
     img: ethereumIcon,
@@ -90,14 +109,6 @@ let networks = [
     disabled: false,
     selected: false,
     hideImg: false,
-  },
-  {
-    name: 'Not Supported',
-    img: polygonIcon,
-    chainId: -1,
-    disabled: false,
-    selected: false,
-    hideImg: true,
   },
 ]
 

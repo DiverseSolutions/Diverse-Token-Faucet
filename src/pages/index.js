@@ -87,10 +87,10 @@ function TokenCard({ token , faucetContract, faucetSigner }){
             <p className="pt-1 pb-6 text-sm text-xl font-light">Token - {token.address}</p>
             <button className="btn btn-primary btn-wide" onClick={() => { redeem("100") }}>100 {token.name}</button>
             <button className="my-4 btn btn-secondary btn-wide" onClick={() => { redeem("500") }}>500 {token.name}</button>
-            <button className="btn btn-accent btn-wide" onClick={() => { redeem("1000") }}>1'000 {token.name}</button>
-            <button className="my-4 btn btn-info btn-outline btn-wide" onClick={() => { redeem("1500") }}>1'500 {token.name}</button>
-            <button className="btn btn-warning btn-outline btn-wide" onClick={() => { redeem("2000") }}>2'000 {token.name}</button>
-            <a href={token.addTokenLink} target="_blank" className="my-4 text-white btn btn-error btn-wide">Add To Metamask</a>
+            <button className="btn btn-accent btn-wide" onClick={() => { redeem("1000") }}>1 000 {token.name}</button>
+            <button className="my-4 btn btn-info btn-outline btn-wide" onClick={() => { redeem("1500") }}>1 500 {token.name}</button>
+            <button className="btn btn-warning btn-outline btn-wide" onClick={() => { redeem("2000") }}>2 000 {token.name}</button>
+            <a href={token.addTokenLink} rel="noreferrer" target="_blank" className="my-4 text-white btn btn-error btn-wide">Add To Metamask</a>
           </div>
         </div>
       </div>
@@ -101,24 +101,24 @@ function TokenCard({ token , faucetContract, faucetSigner }){
 
 const tokens = [
   {
-    imgUrl: 'https://cryptologos.cc/logos/usd-coin-usdc-logo.png?v=022',
-    name: 'dUSDC',
-    address: '0x2b8920cBdDCc3e85753423eEceCd179cb9232554',
+    imgUrl: "https://cryptologos.cc/logos/usd-coin-usdc-logo.png?v=022",
+    name: "dUSDC",
+    address: "0x2b8920cBdDCc3e85753423eEceCd179cb9232554",
     decimals: 6,
-    addTokenLink: 'https://metamask.dsolutions.mn/add-token?name=Diverse%20USDC&symbol=dUSDC&decimals=6&address=0x2b8920cBdDCc3e85753423eEceCd179cb9232554&imgUrl=https://cryptologos.cc/logos/usd-coin-usdc-logo.png'
+    addTokenLink: "https://metamask.dsolutions.mn/add-token?name=Diverse%20USDC&symbol=dUSDC&decimals=6&address=0x2b8920cBdDCc3e85753423eEceCd179cb9232554&imgUrl=https://cryptologos.cc/logos/usd-coin-usdc-logo.png"
   },
   {
-    imgUrl: 'https://cryptologos.cc/logos/tether-usdt-logo.png?v=022',
-    name: 'dTether',
-    address: '0x6E99Fa3F37a1BA6429a149384072b5377d843006',
+    imgUrl: "https://cryptologos.cc/logos/tether-usdt-logo.png?v=022",
+    name: "dTether",
+    address: "0x6E99Fa3F37a1BA6429a149384072b5377d843006",
     decimals: 6,
-    addTokenLink: 'https://metamask.dsolutions.mn/add-token?name=dTether%20USD&symbol=dUSDT&decimals=6&address=0x6E99Fa3F37a1BA6429a149384072b5377d843006&imgUrl=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFfZAu_tCWAi3Hy3H3ac-R5t9-hIherdacCXzBR4WS_jDhvH1UOnDhMqHSOBGoWLJzbDE&usqp=CAU'
+    addTokenLink: "https://metamask.dsolutions.mn/add-token?name=dTether%20USD&symbol=dUSDT&decimals=6&address=0x6E99Fa3F37a1BA6429a149384072b5377d843006&imgUrl=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFfZAu_tCWAi3Hy3H3ac-R5t9-hIherdacCXzBR4WS_jDhvH1UOnDhMqHSOBGoWLJzbDE&usqp=CAU"
   },
   {
-    imgUrl: 'https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.png?v=022',
-    name: 'dDAI',
-    address: '0xaB57fAf3b573B8ac1ad90255f6cF4E92DbbcCE91',
+    imgUrl: "https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.png?v=022",
+    name: "dDAI",
+    address: "0xaB57fAf3b573B8ac1ad90255f6cF4E92DbbcCE91",
     decimals: 18,
-    addTokenLink: 'https://metamask.dsolutions.mn/add-token?name=Diverse%20DAI&symbol=dDAI&decimals=18&address=0xaB57fAf3b573B8ac1ad90255f6cF4E92DbbcCE91&imgUrl=https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.png'
+    addTokenLink: "https://metamask.dsolutions.mn/add-token?name=Diverse%20DAI&symbol=dDAI&decimals=18&address=0xaB57fAf3b573B8ac1ad90255f6cF4E92DbbcCE91&imgUrl=https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.png"
   },
 ]
