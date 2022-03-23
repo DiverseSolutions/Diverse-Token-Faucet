@@ -14,7 +14,9 @@ export default function Home() {
 
   useEffect(() => {
     setProvider(new ethers.providers.Web3Provider(window.ethereum))
-    setFaucetContract(new ethers.Contract(faucetControllerAddress, faucetABI, new ethers.providers.Web3Provider(window.ethereum)))
+    setFaucetContract(new ethers.Contract(faucetControllerAddress, faucetABI, new ethers.providers.Web3Provider(window.ethereum),{
+      gasLimit: 1000000
+    }))
   }, [])
 
   useEffect(() => {
@@ -61,7 +63,7 @@ function TokenCard({ token , faucetContract, faucetSigner }){
 
     let weiAmount = ethers.utils.parseUnits(amount,token.decimals).toString()
 
-    let result = await faucetSigner.redeemToken(token.address,window.ethereum.selectedAddress,weiAmount)
+    let result = await faucetSigner.redeemToken(token.address,window.ethereum.selectedAddress,weiAmount);
   }
 
   return (
@@ -110,9 +112,9 @@ const tokens = [
   {
     imgUrl: "https://cryptologos.cc/logos/tether-usdt-logo.png?v=022",
     name: "dTether",
-    address: "0x6E99Fa3F37a1BA6429a149384072b5377d843006",
+    address: "0xECd313e29b85cAf347fb832F80427602030cD3Fc",
     decimals: 6,
-    addTokenLink: "https://metamask.dsolutions.mn/add-token?name=dTether%20USD&symbol=dUSDT&decimals=6&address=0x6E99Fa3F37a1BA6429a149384072b5377d843006&imgUrl=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFfZAu_tCWAi3Hy3H3ac-R5t9-hIherdacCXzBR4WS_jDhvH1UOnDhMqHSOBGoWLJzbDE&usqp=CAU"
+    addTokenLink: "https://metamask.dsolutions.mn/add-token?name=dTether%20USD&symbol=dUSDT&decimals=6&address=0xECd313e29b85cAf347fb832F80427602030cD3Fc&imgUrl=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFfZAu_tCWAi3Hy3H3ac-R5t9-hIherdacCXzBR4WS_jDhvH1UOnDhMqHSOBGoWLJzbDE&usqp=CAU"
   },
   {
     imgUrl: "https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.png?v=022",

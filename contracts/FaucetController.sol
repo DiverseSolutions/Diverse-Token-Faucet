@@ -33,7 +33,6 @@ contract FaucetController {
 
   function redeemToken(address _tokenAddress,address _userAddress,uint _amount) external returns(bool){
     require(IERC20(_tokenAddress).balanceOf(address(this)) > 0,"No Fund Detected For Token");
-
     bool result = IERC20(_tokenAddress).transfer(_userAddress,_amount);
     emit TokenRedeemed(_userAddress,_amount,result);
 

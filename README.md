@@ -22,7 +22,7 @@
 ---
  - Diverse Tether 
     - [Github Repo](https://github.com/DiverseSolutions/ERC20-DiverseTetherToken)
-    - <a href="https://metamask.dsolutions.mn/add-token?name=dTether%20USD&symbol=dUSDT&decimals=6&address=0x6E99Fa3F37a1BA6429a149384072b5377d843006&imgUrl=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFfZAu_tCWAi3Hy3H3ac-R5t9-hIherdacCXzBR4WS_jDhvH1UOnDhMqHSOBGoWLJzbDE&usqp=CAU">![Diverse Metamask](https://img.shields.io/badge/Diverse%20Metamask-Add%20Token-blue?style=flat&logo=github)</a>
+    - <a href="https://metamask.dsolutions.mn/add-token?name=dTether%20USD&symbol=dUSDT&decimals=6&address=0xECd313e29b85cAf347fb832F80427602030cD3Fc&imgUrl=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFfZAu_tCWAi3Hy3H3ac-R5t9-hIherdacCXzBR4WS_jDhvH1UOnDhMqHSOBGoWLJzbDE&usqp=CAU">![Diverse Metamask](https://img.shields.io/badge/Diverse%20Metamask-Add%20Token-blue?style=flat&logo=github)</a>
  - Diverse Dai
     - [Github Repo](https://github.com/DiverseSolutions/ERC20-DiverseUSDcToken)
     - <a href="https://metamask.dsolutions.mn/add-token?name=Diverse%20DAI&symbol=dDAI&decimals=18&address=0xaB57fAf3b573B8ac1ad90255f6cF4E92DbbcCE91&imgUrl=https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.png">![Diverse Metamask](https://img.shields.io/badge/Diverse%20Metamask-Add%20Token-blue?style=flat&logo=github)</a>
