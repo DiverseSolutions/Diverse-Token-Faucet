@@ -28,7 +28,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center my-20">
         <div className="w-10/12 grid gap-20 grid-cols-3 justify-items-center grid-rows-1">
           { tokens.map((i,k) => (
             <div key={k}>
@@ -137,5 +137,19 @@ const tokens = [
     address: "0x551181Be541f56ce6C6c13448F54Adb8eA2AB531",
     decimals: 18,
     addTokenLink: "https://metamask.dsolutions.mn/add-token?name=DummyToken-B&symbol=TKN-B&decimals=18&address=0x551181Be541f56ce6C6c13448F54Adb8eA2AB531&imgUrl=https://faucet.dsolutions.mn/diversetoken.png"
+  },
+  {
+    imgUrl: "https://faucet.dsolutions.mn/diversetoken.png",
+    name: "DummyToken-C",
+    address: "0x14cD48F91D3ca4FE9C7e2e888d68667879942A9D",
+    decimals: 18,
+    addTokenLink: "https://metamask.dsolutions.mn/add-token?name=DummyToken-C&symbol=TKN-C&decimals=18&address=0x14cD48F91D3ca4FE9C7e2e888d68667879942A9D&imgUrl=https://faucet.dsolutions.mn/diversetoken.png"
+  },
+  {
+    imgUrl: "https://faucet.dsolutions.mn/diversetoken.png",
+    name: "DummyToken-D",
+    address: "0x76Cc59faf54D6262680049D4B5c74e7A587C8849",
+    decimals: 18,
+    addTokenLink: "https://metamask.dsolutions.mn/add-token?name=DummyToken-D&symbol=TKN-D&decimals=18&address=0x76Cc59faf54D6262680049D4B5c74e7A587C8849&imgUrl=https://faucet.dsolutions.mn/diversetoken.png"
   },
 ]
