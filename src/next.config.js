@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['cryptologos.cc'],
+    domains: ['cryptologos.cc','faucet.dsolutions.mn'],
   },
   eslint: {
     // Warning: This allows production builds to successfully complete even if

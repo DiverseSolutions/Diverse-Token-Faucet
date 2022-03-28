@@ -70,7 +70,7 @@ function TokenCard({ token , faucetContract, faucetSigner }){
     <>
       <div className="shadow-xl card w-96 bg-base-100">
         <figure className="px-10 pt-10">
-          <Image src={token.imgUrl} alt="token_img" width={"304"} height={"304"}/>
+          <Image src={token.imgUrl} alt="token_img" width={"250"} height={"250"}/>
         </figure>
         <div className="items-center text-center card-body">
           <div className="card-actions">
@@ -122,5 +122,20 @@ const tokens = [
     address: "0xaB57fAf3b573B8ac1ad90255f6cF4E92DbbcCE91",
     decimals: 18,
     addTokenLink: "https://metamask.dsolutions.mn/add-token?name=Diverse%20DAI&symbol=dDAI&decimals=18&address=0xaB57fAf3b573B8ac1ad90255f6cF4E92DbbcCE91&imgUrl=https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.png"
+  },
+
+  {
+    imgUrl: "https://faucet.dsolutions.mn/diversetoken.png",
+    name: "DummyToken-A",
+    address: "0x8A250B3517AD8d59354D50af0D9be5c4Cd90F070",
+    decimals: 18,
+    addTokenLink: "https://metamask.dsolutions.mn/add-token?name=DummyToken-A&symbol=TKN-A&decimals=18&address=0x8A250B3517AD8d59354D50af0D9be5c4Cd90F070&imgUrl=https://faucet.dsolutions.mn/diversetoken.png"
+  },
+  {
+    imgUrl: "https://faucet.dsolutions.mn/diversetoken.png",
+    name: "DummyToken-B",
+    address: "0x551181Be541f56ce6C6c13448F54Adb8eA2AB531",
+    decimals: 18,
+    addTokenLink: "https://metamask.dsolutions.mn/add-token?name=DummyToken-B&symbol=TKN-B&decimals=18&address=0x551181Be541f56ce6C6c13448F54Adb8eA2AB531&imgUrl=https://faucet.dsolutions.mn/diversetoken.png"
   },
 ]
