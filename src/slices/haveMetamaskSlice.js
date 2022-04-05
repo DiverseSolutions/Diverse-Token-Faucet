@@ -1,4 +1,4 @@
-import { createSlice, configureStore } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 const haveMetamaskSlice = createSlice({
   name : 'haveMetamask',
@@ -6,9 +6,7 @@ const haveMetamaskSlice = createSlice({
     value: false
   },
   reducers : {
-
   },
 })
 
-export default haveMetamaskSlice;
-
+export const haveMetamaskReducer = haveMetamaskSlice.reducer;

@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import haveMetamaskSlice from "./slices/haveMetamaskSlice";
+import { haveMetamaskReducer } from "./slices/haveMetamaskSlice";
+import { networksReducers } from './slices/networksSlice';
 
 const store = configureStore({
-  reducer: haveMetamaskSlice.reducer
+  reducer: {
+    haveMetamask: haveMetamaskReducer,
+    networks: networksReducers,
+  }
 })
 
 export default store;

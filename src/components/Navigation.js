@@ -1,62 +1,94 @@
-import React from 'react'
-import { useHaveMetamask,useMetamaskConnect } from 'diverse-metamask-hooks'
+import Image from 'next/image'
 
-import Image from 'next/image';
+import React, { useMemo, useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
+export default function Navigation() {
+  const networks = useSelector((state) => state.networks);
 
+  const [fullAccount] = useState("");
+  const account = useMemo(() => {
+    return fullAccount !== ""
+      ? fullAccount.substring(0, 8) + "..."
+      : "No Account";
+  }, [fullAccount]);
 
-export default function Navigation({ networks }) {
-  const [haveMetamask,checkBrowserHasMetamask] = useHaveMetamask();
-  const [accounts,connect] = useMetamaskConnect();
-
-  function checkMetamaskAndConnect(){
-    if(!haveMetamask){
-      if (typeof window !== "undefined") {
-        checkBrowserHasMetamask()
-      }
+  useEffect(() => {
+    if(networks.state == 'succeeded'){
+      console.log(networks.data)
     }
-
-    if(accounts.length == 0){
-      if (typeof window !== "undefined") {
-        connect()
-      }
-    }
-  }
+  },[networks.state])
 
   return (
-    <>
-      <div className="navbar bg-base-100">
-        <div className="flex-1">
-          <a className="text-xl normal-case btn btn-ghost"><span className="mr-2 text-blue-500">Diverse</span> ERC-20 Faucets</a>
+    <div className="absolute top-0 left-0 w-full bg-base-100">
+      <div className="px-12 navbar">
+        <div className="flex-1 text-xl font-semibold">
+          <a className="text-blue-600">Diverse</a>
+          <span className="ml-1">Solutions</span>
         </div>
         <div className="flex-none">
-          <ul className="p-0 font-semibold menu menu-horizontal rounded-box">
-            <li tabIndex="0" className="z-10 mr-5">
-              <a>
-                Networks
-                <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
+          <ul className="p-0 menu menu-horizontal">
+            <li>
+              <a className="text-2xl btn btn-link">
+                <svg width="1em" height="1em" viewBox="0 0 256 256">
+                  <path
+                    fill="#395185"
+                    d="M241.871 256.001c7.802 0 14.129-6.326 14.129-14.129V14.129C256 6.325 249.673 0 241.871 0H14.129C6.324 0 0 6.325 0 14.129v227.743c0 7.803 6.324 14.129 14.129 14.129h227.742"
+                  ></path>
+                  <path
+                    fill="#FFF"
+                    d="M176.635 256.001v-99.137h33.277l4.982-38.635h-38.259V93.561c0-11.186 3.107-18.809 19.148-18.809l20.459-.009V40.188c-3.54-.471-15.684-1.523-29.812-1.523c-29.498 0-49.692 18.005-49.692 51.071v28.493h-33.362v38.635h33.362v99.137h39.897"
+                  ></path>
+                </svg>
               </a>
-              <ul className="w-40 p-2 -right-3 bg-base-200">
-                { networks.map((i,k) => NetworkItem(i,k)) }
-              </ul>
             </li>
-            <li><a onClick={() => { checkMetamaskAndConnect() }} className={`text-blue-500 btn btn-outline ${accounts.length > 0 ? 'btn-disabled' : ''}`}>{haveMetamask & accounts.length > 0 ? `${accounts[0].substring(0,12)}...` : "Connect"  }</a></li>
+            <li className="mx-2">
+              <a className="text-2xl btn btn-link">
+                <svg width="1.03em" height="1em" viewBox="0 0 256 250">
+                  <path
+                    fill="#161614"
+                    d="M128.001 0C57.317 0 0 57.307 0 128.001c0 56.554 36.676 104.535 87.535 121.46c6.397 1.185 8.746-2.777 8.746-6.158c0-3.052-.12-13.135-.174-23.83c-35.61 7.742-43.124-15.103-43.124-15.103c-5.823-14.795-14.213-18.73-14.213-18.73c-11.613-7.944.876-7.78.876-7.78c12.853.902 19.621 13.19 19.621 13.19c11.417 19.568 29.945 13.911 37.249 10.64c1.149-8.272 4.466-13.92 8.127-17.116c-28.431-3.236-58.318-14.212-58.318-63.258c0-13.975 5-25.394 13.188-34.358c-1.329-3.224-5.71-16.242 1.24-33.874c0 0 10.749-3.44 35.21 13.121c10.21-2.836 21.16-4.258 32.038-4.307c10.878.049 21.837 1.47 32.066 4.307c24.431-16.56 35.165-13.12 35.165-13.12c6.967 17.63 2.584 30.65 1.255 33.873c8.207 8.964 13.173 20.383 13.173 34.358c0 49.163-29.944 59.988-58.447 63.157c4.591 3.972 8.682 11.762 8.682 23.704c0 17.126-.148 30.91-.148 35.126c0 3.407 2.304 7.398 8.792 6.14C219.37 232.5 256 184.537 256 128.002C256 57.307 198.691 0 128.001 0Zm-80.06 182.34c-.282.636-1.283.827-2.194.39c-.929-.417-1.45-1.284-1.15-1.922c.276-.655 1.279-.838 2.205-.399c.93.418 1.46 1.293 1.139 1.931Zm6.296 5.618c-.61.566-1.804.303-2.614-.591c-.837-.892-.994-2.086-.375-2.66c.63-.566 1.787-.301 2.626.591c.838.903 1 2.088.363 2.66Zm4.32 7.188c-.785.545-2.067.034-2.86-1.104c-.784-1.138-.784-2.503.017-3.05c.795-.547 2.058-.055 2.861 1.075c.782 1.157.782 2.522-.019 3.08Zm7.304 8.325c-.701.774-2.196.566-3.29-.49c-1.119-1.032-1.43-2.496-.726-3.27c.71-.776 2.213-.558 3.315.49c1.11 1.03 1.45 2.505.701 3.27Zm9.442 2.81c-.31 1.003-1.75 1.459-3.199 1.033c-1.448-.439-2.395-1.613-2.103-2.626c.301-1.01 1.747-1.484 3.207-1.028c1.446.436 2.396 1.602 2.095 2.622Zm10.744 1.193c.036 1.055-1.193 1.93-2.715 1.95c-1.53.034-2.769-.82-2.786-1.86c0-1.065 1.202-1.932 2.733-1.958c1.522-.03 2.768.818 2.768 1.868Zm10.555-.405c.182 1.03-.875 2.088-2.387 2.37c-1.485.271-2.861-.365-3.05-1.386c-.184-1.056.893-2.114 2.376-2.387c1.514-.263 2.868.356 3.061 1.403Z"
+                  ></path>
+                </svg>
+              </a>
+            </li>
+
+            <li tabIndex="0" className="mr-2">
+              {networks.state == "loading" ? (
+                <a className="text-white btn btn-info loading">
+                  Loading
+                </a>
+              ) : (
+                <a className="text-white btn btn-info" >
+                  No Network
+                  <svg
+                    className="fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                  </svg>
+                </a>
+              )}
+
+              <ul className="p-2 bg-base-100">
+                { networks.state == 'succeeded' && networks.data.map((network,key) => (
+                  <li key={key} className="flex flex-col mb-2 btn btn-outline">
+                    <Image src={network.logos[0]} alt="network_logo" width={25} height={25} />
+                    <p>{network.name[1] != null ? network.name[1] : network.name[0]}</p>
+                  </li>
+                ))}
+              </ul>
+
+            </li>
+            <li>
+              <a className="text-white btn btn-primary">{account}</a>
+            </li>
           </ul>
         </div>
       </div>
-    </>
-  )
+    </div>
+  );
 }
-
-function NetworkItem(item,key){
-    return (
-      <li key={key} className={`${item.disabled ? 'disabled' : ''}`}>
-        <a className={`${item.selected && "active"}`}>
-          { !item.hideImg && ( <Image src={item.img} width={20} height={20} alt="network_icon" /> ) }
-          { item.name } 
-        </a>
-      </li>
-    )
-}
-
-

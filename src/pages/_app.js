@@ -1,13 +1,16 @@
+import Head from 'next/head'
+
 import {useEffect,useState} from 'react';
-import { Provider } from 'react-redux';
-import { useSelector } from 'react-redux'
+import { Provider,useSelector,useDispatch } from 'react-redux';
 
 import '../styles/globals.css'
-import Head from 'next/head'
 import store from '../store';
 
-function MyApp({ Component, pageProps }) {
+import { fetchNetworks } from '../slices/networksSlice.js';
 
+import Navigation from '../components/Navigation.js';
+
+function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
@@ -26,10 +29,22 @@ function MyApp({ Component, pageProps }) {
 
 function CheckMetamask({ Component }){
   const haveMetamask = useSelector((state) => state.haveMetamask)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchNetworks())
+  },[])
 
   return (
     <>
-      { haveMetamask ? ( <Component /> ) : ( <NoMetamask /> ) }
+      { haveMetamask == false ? (
+        <NoMetamask />
+      ) : (
+        <div className="flex items-center justify-center h-screen">
+          <Navigation />
+          <Component />
+        </div>
+      ) }
     </>
   )
 }
