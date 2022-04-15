@@ -9,13 +9,15 @@ export default function Navigation() {
     <div className="w-full bg-base-100">
       <div className="px-4 navbar">
         <div className="flex-1 text-xl font-semibold">
-          <a className="text-blue-600">Diverse</a>
-          <span className="ml-1">Solutions</span>
+          <a href="https://dsolutions.mn/">
+            <span className="mr-1 text-blue-600">Diverse</span>
+            Solutions
+          </a>
         </div>
         <div className="flex-none">
           <ul className="p-0 menu menu-horizontal">
             <li className="mx-2">
-              <a className="text-2xl btn btn-link">
+              <a className="text-2xl btn btn-link" href="https://github.com/DiverseSolutions">
                 <svg width="1.03em" height="1em" viewBox="0 0 256 250">
                   <path
                     fill="#161614"
