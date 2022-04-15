@@ -1,47 +1,19 @@
-import Image from 'next/image'
+import {} from "react";
 
-import React, { useMemo, useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import NetworksDropdown from '../components/nav/NetworksDropdown.js';
+import Account from '../components/nav/Account.js';
 
 export default function Navigation() {
-  const networks = useSelector((state) => state.networks);
-
-  const [fullAccount] = useState("");
-  const account = useMemo(() => {
-    return fullAccount !== ""
-      ? fullAccount.substring(0, 8) + "..."
-      : "No Account";
-  }, [fullAccount]);
-
-  useEffect(() => {
-    if(networks.state == 'succeeded'){
-      console.log(networks.data)
-    }
-  },[networks.state])
 
   return (
-    <div className="absolute top-0 left-0 w-full bg-base-100">
-      <div className="px-12 navbar">
+    <div className="w-full bg-base-100">
+      <div className="px-4 navbar">
         <div className="flex-1 text-xl font-semibold">
           <a className="text-blue-600">Diverse</a>
           <span className="ml-1">Solutions</span>
         </div>
         <div className="flex-none">
           <ul className="p-0 menu menu-horizontal">
-            <li>
-              <a className="text-2xl btn btn-link">
-                <svg width="1em" height="1em" viewBox="0 0 256 256">
-                  <path
-                    fill="#395185"
-                    d="M241.871 256.001c7.802 0 14.129-6.326 14.129-14.129V14.129C256 6.325 249.673 0 241.871 0H14.129C6.324 0 0 6.325 0 14.129v227.743c0 7.803 6.324 14.129 14.129 14.129h227.742"
-                  ></path>
-                  <path
-                    fill="#FFF"
-                    d="M176.635 256.001v-99.137h33.277l4.982-38.635h-38.259V93.561c0-11.186 3.107-18.809 19.148-18.809l20.459-.009V40.188c-3.54-.471-15.684-1.523-29.812-1.523c-29.498 0-49.692 18.005-49.692 51.071v28.493h-33.362v38.635h33.362v99.137h39.897"
-                  ></path>
-                </svg>
-              </a>
-            </li>
             <li className="mx-2">
               <a className="text-2xl btn btn-link">
                 <svg width="1.03em" height="1em" viewBox="0 0 256 250">
@@ -53,39 +25,8 @@ export default function Navigation() {
               </a>
             </li>
 
-            <li tabIndex="0" className="mr-2">
-              {networks.state == "loading" ? (
-                <a className="text-white btn btn-info loading">
-                  Loading
-                </a>
-              ) : (
-                <a className="text-white btn btn-info" >
-                  No Network
-                  <svg
-                    className="fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-                  </svg>
-                </a>
-              )}
-
-              <ul className="p-2 bg-base-100">
-                { networks.state == 'succeeded' && networks.data.map((network,key) => (
-                  <li key={key} className="flex flex-col mb-2 btn btn-outline">
-                    <Image src={network.logos[0]} alt="network_logo" width={25} height={25} />
-                    <p>{network.name[1] != null ? network.name[1] : network.name[0]}</p>
-                  </li>
-                ))}
-              </ul>
-
-            </li>
-            <li>
-              <a className="text-white btn btn-primary">{account}</a>
-            </li>
+            <NetworksDropdown />
+            <Account />
           </ul>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit';
 
-const networksSlice = createSlice({
-  name: 'networksSlice',
+const tokensSlice = createSlice({
+  name: 'tokensSlice',
   initialState: {
     data: [],
     // 'idle' | 'loading' | 'succeeded' | 'failed'
@@ -13,23 +13,23 @@ const networksSlice = createSlice({
   },
   extraReducers(builder){
     builder
-      .addCase(fetchNetworks.pending, (state, action) => {
+      .addCase(fetchTokens.pending, (state, action) => {
         state.state = 'loading'
       })
-      .addCase(fetchNetworks.fulfilled, (state, action) => {
+      .addCase(fetchTokens.fulfilled, (state, action) => {
         state.state = 'succeeded'
         state.data = state.data.concat(action.payload)
       })
-      .addCase(fetchNetworks.rejected, (state, action) => {
+      .addCase(fetchTokens.rejected, (state, action) => {
         state.state = 'failed'
         state.error = action.error.message
       })
   }
 })
 
-export const fetchNetworks = createAsyncThunk('networks/fetchNetworks',async () => {
-  let data = await fetch("https://chainlist.dsolutions.mn/api/chainlist")
+export const fetchTokens = createAsyncThunk('tokens/fetchTokens',async () => {
+  let data = await fetch("https://tokenlist.dsolutions.mn/api/mumbai/tokenlist")
   return data.json()
 })
 
-export const networksReducer = networksSlice.reducer;
+export const tokensReducer = tokensSlice.reducer;

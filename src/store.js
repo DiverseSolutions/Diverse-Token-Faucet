@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import { haveMetamaskReducer } from "./slices/haveMetamaskSlice";
-import { networksReducers } from './slices/networksSlice';
+import { metamaskReducer } from "./slices/metamaskSlice";
+import { networksReducer } from './slices/networksSlice';
+import { tokensReducer } from './slices/tokensSlice';
 
 const store = configureStore({
   reducer: {
-    haveMetamask: haveMetamaskReducer,
-    networks: networksReducers,
+    metamask: metamaskReducer,
+    networks: networksReducer,
+    tokens: tokensReducer,
   }
 })
 
