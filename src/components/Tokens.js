@@ -59,7 +59,7 @@ export default function Tokens(){
 
   if(tokens.state == 'succeeded' && networkTokens != null){
     return (
-      <div className="py-10 grid grid-cols-3 gap-10">
+      <div className="py-10 grid grid-cols-1 md:grid-cols-3 gap-10">
         { networkTokens.tokens.map((i,k) => (
           <Token faucetContact={faucetSignerContract} data={i} key={k} index={k} />
         )) }

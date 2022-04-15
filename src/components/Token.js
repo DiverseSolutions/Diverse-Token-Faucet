@@ -55,13 +55,13 @@ export default function Token({ faucetContact,data,index }){
 
   return (
     <div className="border mockup-window bg-base-300">
-      <div className="flex justify-center py-16 bg-base-200">
-        <div className="card card-side">
-          <figure>
+      <div className="flex flex-col justify-center py-16 md:flex-row bg-base-200">
+        <div className="md:card md:card-side">
+          <figure className="text-center">
             <Image src={data.logoURI} alt="token_image" height={120} width={120}/>
           </figure>
           <div className="card-body">
-            <h5 className="card-title">{data.name}</h5>
+            <h5 className="text-xl text-center md:card-title">{data.name}</h5>
             <div className="flex justify-between">
               <p>Symbol : {data.symbol}</p>
               <p>Decimals : {data.decimals}</p>

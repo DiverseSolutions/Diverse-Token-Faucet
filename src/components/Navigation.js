@@ -7,9 +7,9 @@ export default function Navigation() {
 
   return (
     <div className="w-full bg-base-100">
-      <div className="px-4 navbar">
-        <div className="flex-1 text-xl font-semibold">
-          <a href="https://dsolutions.mn/">
+      <div className="md:px-4 navbar">
+        <div className="flex-1 hidden text-sm font-semibold md:text-xl md:block">
+          <a href="https://dsolutions.mn/" className="">
             <span className="mr-1 text-blue-600">Diverse</span>
             Solutions
           </a>
@@ -17,7 +17,7 @@ export default function Navigation() {
         <div className="flex-none">
           <ul className="p-0 menu menu-horizontal">
             <li className="mx-2">
-              <a className="text-2xl btn btn-link" href="https://github.com/DiverseSolutions">
+              <a className="hidden text-2xl md:block btn btn-link" href="https://github.com/DiverseSolutions">
                 <svg width="1.03em" height="1em" viewBox="0 0 256 250">
                   <path
                     fill="#161614"
