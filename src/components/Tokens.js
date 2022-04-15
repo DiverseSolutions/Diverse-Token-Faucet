@@ -1,12 +1,17 @@
 import { useSelector,useDispatch } from 'react-redux';
 import { useEffect,useState } from 'react';
+import { ethers } from "ethers";
 
 import { fetchTokens } from '../slices/tokensSlice';
 
 import Token from './Token.js';
+import FaucetControllerABI from '../abi/FaucetController.json';
 
 export default function Tokens(){
+  const FaucetControllerAddress = '0x2eFbAa7BC2a3F2c351084469907D493861988980'
   const [networkTokens,setNetworkTokens] = useState(null)
+  const [faucetContact,setFaucetContact] = useState(null)
+  const [faucetSignerContract,setFaucetSignerContract] = useState(null)
 
   const tokens = useSelector((state) => state.tokens);
   const metamask = useSelector((state) => state.metamask);
@@ -21,14 +26,8 @@ export default function Tokens(){
 
   useEffect(() => {
     if(tokens.state == 'succeeded'){
-      let foundToken = tokens.data.find((i) => i.chainId == metamask.chainId)
-
-      if(foundToken === undefined){
-        setNetworkTokens(null)
-        return;
-      }
-      
-      setNetworkTokens(foundToken)
+      setUpFaucetControllerContract()
+      setUpFoundNetworkTokens()
     }
   },[tokens.state])
 
@@ -36,6 +35,15 @@ export default function Tokens(){
     return (
       <div className="flex items-center justify-center h-screen">
         <h1 className="text-3xl font-semibold">Fetching Network Tokens Data ...</h1>
+      </div>
+    )
+  }
+
+  if(tokens.state === 'failed'){
+    return (
+      <div className="flex flex-col items-center justify-center h-screen">
+        <h1 className="text-3xl font-semibold">Fetching Tokens Failed :(</h1>
+        <h1 className="mt-2 text-lg">Reload Browser To Try Again</h1>
       </div>
     )
   }
@@ -53,7 +61,7 @@ export default function Tokens(){
     return (
       <div className="py-10 grid grid-cols-3 gap-10">
         { networkTokens.tokens.map((i,k) => (
-          <Token data={i} key={k} index={k} />
+          <Token faucetContact={faucetSignerContract} data={i} key={k} index={k} />
         )) }
       </div>
     )
@@ -63,6 +71,24 @@ export default function Tokens(){
       <div className="py-10 grid grid-cols-3 gap-10">
       </div>
   )
+
+  async function setUpFaucetControllerContract(){
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    // await provider.send("eth_requestAccounts", []);
+    const _faucetControllerContract = new ethers.Contract(FaucetControllerAddress, FaucetControllerABI, provider);
+    setFaucetContact(_faucetControllerContract)
+    setFaucetSignerContract(_faucetControllerContract.connect(provider.getSigner()))
+  }
+
+  function setUpFoundNetworkTokens(){
+      let foundToken = tokens.data.find((i) => i.chainId == metamask.chainId)
+      if(foundToken === undefined){
+        setNetworkTokens(null)
+        return;
+      }
+
+      setNetworkTokens(foundToken)
+  }
 
 }
 

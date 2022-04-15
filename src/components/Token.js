@@ -1,12 +1,57 @@
 import Image from 'next/image';
-import {useEffect} from "react"
+import { ethers } from "ethers";
+import Swal from 'sweetalert2'
 
-export default function Token({ data,index }){
+
+import { useEffect,useState } from "react"
+import { useSelector } from 'react-redux';
+
+export default function Token({ faucetContact,data,index }){
+  const [tokenContract,setTokenContract] = useState(null)
+  const [tokenBalance,setTokenBalance] = useState(null)
+  const [transactionLoading,setTransactionLoading] = useState(false)
+
+  const metamask = useSelector((state) => state.metamask)
 
   useEffect(() => {
-    // console.log(data)
-    
+    setupTokenBalance()
   },[])
+
+  async function handleRedeemToken(amount){
+    let amountWei = ethers.utils.parseUnits(amount,data.decimals)
+
+    try{
+      let transaction = await faucetContact.redeemToken(data.address,metamask.account,amountWei)
+      setTransactionLoading(true)
+
+      let result = await transaction.wait()
+      Swal.fire({
+        icon: 'success',
+        title: 'Faucet Sent Tokens',
+        showConfirmButton: true,
+        confirmButtonText: 'Thanks',
+        timer: 2000,
+      })
+      setTransactionLoading(false)
+      setupTokenBalance()
+    }catch(e){
+      console.log(e)
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Faucet Contract Error',
+        text: e.data?.message ?? e.message,
+        showConfirmButton: true,
+        confirmButtonText: 'Okay',
+      })
+    }
+  }
+
+  async function setupTokenBalance(){
+    let balanceBN = await faucetContact.getTokenFund(data.address)
+    let balance = ethers.utils.formatUnits(balanceBN,data.decimals)
+    setTokenBalance(ethers.utils.commify(parseInt(balance)))
+  }
 
   return (
     <div className="border mockup-window bg-base-300">
@@ -34,15 +79,28 @@ export default function Token({ data,index }){
       <input type="checkbox" id={`tokenModal-${index}`} className="modal-toggle"/>
       <label htmlFor={`tokenModal-${index}`} className="cursor-pointer modal">
         <label className="relative modal-box" htmlFor="">
-          <h2 className="text-lg font-bold text-center">Token {data.symbol} Address</h2>
-          <h3 className="font-light text-center text-md">{data.address}</h3>
-
+          <h3 className="my-1 text-lg font-semibold text-center">Faucet Fund : {tokenBalance != null ? tokenBalance : 'Loading...'}</h3>
+          <h3 className="text-sm font-light text-center">{data.address}</h3>
           <div className="py-8">
-            <button className="w-full my-0 btn btn-outline btn-primary">1000 Token</button>
-            <button className="w-full my-4 btn btn-outline btn-warning">5000 Token</button>
-            <button className="w-full my-0 btn btn-outline btn-success">10000 Token</button>
-            <button className="w-full my-4 btn btn-outline btn-info">15000 Token</button>
-            <button className="w-full my-0 btn btn-outline btn-accent">20000 Token</button>
+            { transactionLoading == true ? (
+              <>
+                <button onClick={()=>{  }} className="w-full my-4 loading btn btn-outline">50 Token</button>
+                <button onClick={()=>{  }} className="w-full my-0 loading btn btn-outline btn-primary">100 Token</button>
+                <button onClick={()=>{  }} className="w-full my-4 loading btn btn-outline btn-warning">500 Token</button>
+                <button onClick={()=>{  }} className="w-full my-0 loading btn btn-outline btn-success">1000 Token</button>
+                <button onClick={()=>{  }} className="w-full my-4 loading btn btn-outline btn-info">1500 Token</button>
+                <button onClick={()=>{  }} className="w-full my-0 loading btn btn-outline btn-accent">2000 Token</button>
+              </>
+            ) : (
+              <>
+                <button onClick={()=>{ handleRedeemToken('50') }} className="w-full my-4 btn btn-outline">50 Token</button>
+                <button onClick={()=>{ handleRedeemToken('100') }} className="w-full my-0 btn btn-outline btn-primary">100 Token</button>
+                <button onClick={()=>{ handleRedeemToken('500') }} className="w-full my-4 btn btn-outline btn-warning">500 Token</button>
+                <button onClick={()=>{ handleRedeemToken('1000') }} className="w-full my-0 btn btn-outline btn-success">1000 Token</button>
+                <button onClick={()=>{ handleRedeemToken('1500') }} className="w-full my-4 btn btn-outline btn-info">1500 Token</button>
+                <button onClick={()=>{ handleRedeemToken('2000') }} className="w-full my-0 btn btn-outline btn-accent">2000 Token</button>
+              </>
+            ) }
           </div>
         </label>
       </label>

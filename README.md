@@ -7,7 +7,7 @@
 #### FaucetController Smart Contract
 ---
  - [Polygon Mumbai - FaucetController](https://mumbai.polygonscan.com/address/0x2eFbAa7BC2a3F2c351084469907D493861988980)
-    - Contract Address 0x2eFbAa7BC2a3F2c351084469907D493861988980 
+    - Contract Address 0x2eFbAa7BC2a3F2c351084469907D493861988980
     - Owner Address 0xb83E7D21cd4c2f162692bbf2C94f864FEE488965 
 
 <br/>

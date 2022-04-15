@@ -23,6 +23,15 @@ export default function Home() {
     )
   }
 
+  if(networks.state === 'failed'){
+    return (
+      <div className="flex flex-col items-center justify-center h-screen">
+        <h1 className="text-3xl font-semibold">Fetching Network Failed :(</h1>
+        <h1 className="mt-2 text-lg">Reload Browser To Try Again</h1>
+      </div>
+    )
+  }
+
   return (
     <>
       <div className="w-full px-10">
