@@ -16,6 +16,11 @@ const metamaskSlice = createSlice({
     checkMetamask: (state) => {
       if (typeof window.ethereum !== 'undefined') {
         state.haveMetamask = true;
+
+        if(window.ethereum.selectedAddress !== null){
+          state.account = window.ethereum.selectedAddress
+          state.chainId = parseInt(window.ethereum.networkVersion)
+        }
       }
     },
     setAccount: (state,action) => {
@@ -32,6 +37,8 @@ const metamaskSlice = createSlice({
       })
       .addCase(fetchMetamaskAccounts.fulfilled,(state,action) => {
         state.accountState = 'succeeded'
+        state.account = window.ethereum.selectedAddress
+        state.chainId = parseInt(window.ethereum.networkVersion)
         state.accounts = [...action.payload]
       })
       .addCase(fetchMetamaskAccounts.rejected,(state,action) => {
@@ -47,10 +54,6 @@ const metamaskSlice = createSlice({
 
 export const fetchMetamaskAccounts = createAsyncThunk('metamask/fetchMetamaskAccounts', async (payload,thunkAPI) => {
   const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
-  batch(() => {
-    thunkAPI.dispatch(metamaskSlice.actions.setAccount(window.ethereum.selectedAddress))
-    thunkAPI.dispatch(metamaskSlice.actions.setChainId(parseInt(window.ethereum.networkVersion)))
-  })
   return accounts
 })
 
