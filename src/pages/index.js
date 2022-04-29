@@ -18,7 +18,7 @@ export default function Home() {
   if(networks.state === 'loading'){
     return (
       <div className="flex items-center justify-center h-screen">
-        <h1 className="text-3xl font-semibold">Fetching Networks Data ...</h1>
+        <h1 className="text-sm font-semibold md:text-3xl">Fetching Networks Data ...</h1>
       </div>
     )
   }
@@ -26,8 +26,8 @@ export default function Home() {
   if(networks.state === 'failed'){
     return (
       <div className="flex flex-col items-center justify-center h-screen">
-        <h1 className="text-3xl font-semibold">Fetching Network Failed :(</h1>
-        <h1 className="mt-2 text-lg">Reload Browser To Try Again</h1>
+        <h1 className="text-sm font-semibold text-center md:text-3xl">Fetching Network Failed :(</h1>
+        <h1 className="mt-2 text-lg text-center">Reload Browser To Try Again</h1>
       </div>
     )
   }

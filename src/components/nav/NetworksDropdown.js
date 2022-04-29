@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link';
 
 import { useEffect,useState } from 'react'
 import { useSelector,useDispatch } from "react-redux";
@@ -73,12 +74,28 @@ export default function NetworksDropdown(){
         )}
 
         <ul className="absolute z-20 p-2 bg-base-100">
-          { networks.state == 'succeeded' && network != null && networks.data.map((item,key) => (
-            <li key={key} className={`flex flex-col mb-2 btn ${networkStyle(item)}`}>
-              <Image src={item.logos[0]} alt="network_logo" width={25} height={25} />
-              <p className="bg-transparent">{item.name[1] != null ? item.name[1] : item.name[0]}</p>
-            </li>
-          ))}
+          { networks.state == 'succeeded' && network != null && networks.data.map((item,key) => {
+            if(item.chainId === 80001){
+              return (
+                <Link href={item.addChainLink}>
+                  <li key={key} className={`flex flex-col mb-2 btn btn-info ${networkStyle(item)}`}>
+                    <Image src={item.logos[0]} alt="network_logo" width={25} height={25} />
+                    <p className="bg-transparent">{item.name[1] != null ? item.name[1] : item.name[0]}</p>
+                  </li>
+                </Link>
+              )
+            }
+
+            else{
+              return (
+                <li key={key} className={`flex flex-col mb-2 btn ${networkStyle(item)}`}>
+                  <Image src={item.logos[0]} alt="network_logo" width={25} height={25} />
+                  <p className="bg-transparent">{item.name[1] != null ? item.name[1] : item.name[0]}</p>
+                </li>
+              )
+            }
+          })}
+
         </ul>
 
       </li>
@@ -91,10 +108,15 @@ export default function NetworksDropdown(){
 
     if(item.chainId == network.chainId){
       style += ' text-white btn-success '
-    }else{
-      style += ' btn-active btn-ghost '
+      return style;
     }
 
+    if(item.chainId == 80001){
+      style += ' text-white btn-info '
+      return style;
+    }
+
+    style += ' btn-active btn-ghost '
     return style;
   }
 }

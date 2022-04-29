@@ -34,7 +34,7 @@ export default function Tokens(){
   if(tokens.state === 'loading'){
     return (
       <div className="flex items-center justify-center h-screen">
-        <h1 className="text-3xl font-semibold">Fetching Network Tokens Data ...</h1>
+        <h1 className="text-sm font-semibold md:text-3xl">Fetching Network Tokens Data ...</h1>
       </div>
     )
   }
@@ -42,8 +42,8 @@ export default function Tokens(){
   if(tokens.state === 'failed'){
     return (
       <div className="flex flex-col items-center justify-center h-screen">
-        <h1 className="text-3xl font-semibold">Fetching Tokens Failed :(</h1>
-        <h1 className="mt-2 text-lg">Reload Browser To Try Again</h1>
+        <h1 className="text-sm font-semibold md:text-3xl">Fetching Tokens Failed :(</h1>
+        <h1 className="mt-2 text-xs md:text-lg">Reload Browser To Try Again</h1>
       </div>
     )
   }
@@ -51,8 +51,8 @@ export default function Tokens(){
   if(networkTokens === null){
     return (
       <div className="flex flex-col items-center justify-center h-screen">
-        <h1 className="text-3xl font-semibold">No Diverse Tokens Found On This Network</h1>
-        <h1 className="mt-2 text-lg">Change Network To Supported Networks :)</h1>
+        <h1 className="text-sm font-semibold md:text-3xl">No Diverse Tokens Found On This Network</h1>
+        <h1 className="mt-2 text-xs md:text-lg">Change Network To Supported Networks :)</h1>
       </div>
     )
   }
