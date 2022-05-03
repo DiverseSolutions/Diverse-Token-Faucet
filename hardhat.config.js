@@ -33,7 +33,7 @@ module.exports = {
     "truffle-dashboard": {
       url: "http://localhost:24012/rpc"
     },
-    polygonMumbai: {
+    mumbai: {
       url: process.env.ALCHEMY_MUMBAI_API_URL,
       chainId: 80001,
       accounts: { mnemonic: process.env.MNEMONIC}

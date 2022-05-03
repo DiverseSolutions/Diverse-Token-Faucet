@@ -1,0 +1,13 @@
+[
+  "constructor(uint256)",
+  "event CoinRedeemed(address indexed,uint256)",
+  "event OwnerUpdated(address indexed,address indexed)",
+  "function _amountCap() view returns (uint256)",
+  "function deposit() payable",
+  "function getFaucetBalance() view returns (uint256)",
+  "function masterWithdraw()",
+  "function owner() view returns (address)",
+  "function redeemCoin(address,uint256)",
+  "function setAmountCap(uint256)",
+  "function setOwner(address) returns (address)"
+]
