@@ -25,7 +25,8 @@ export default function Token({ faucetContact,data,index }){
       let transaction = await faucetContact.redeemToken(data.address,metamask.account,amountWei)
       setTransactionLoading(true)
 
-      let result = await transaction.wait()
+      await transaction.wait()
+
       Swal.fire({
         icon: 'success',
         title: 'Faucet Sent Tokens',

@@ -77,8 +77,8 @@ export default function NetworksDropdown(){
           { networks.state == 'succeeded' && network != null && networks.data.map((item,key) => {
             if(item.chainId === 80001){
               return (
-                <Link href={item.addChainLink}>
-                  <li key={key} className={`flex flex-col mb-2 btn btn-info ${networkStyle(item)}`}>
+                <Link href={item.addChainLink} key={key}>
+                  <li className={`flex flex-col mb-2 btn btn-info ${networkStyle(item)}`}>
                     <Image src={item.logos[0]} alt="network_logo" width={25} height={25} />
                     <p className="bg-transparent">{item.name[1] != null ? item.name[1] : item.name[0]}</p>
                   </li>

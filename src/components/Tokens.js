@@ -5,6 +5,7 @@ import { ethers } from "ethers";
 import { fetchTokens } from '../slices/tokensSlice';
 
 import Token from './Token.js';
+import MumbaiCurrencyFaucet from './MumbaiCurrencyFaucet';
 import FaucetControllerABI from '../abi/FaucetController.json';
 
 export default function Tokens(){
@@ -60,6 +61,7 @@ export default function Tokens(){
   if(tokens.state == 'succeeded' && networkTokens != null){
     return (
       <div className="py-10 grid grid-cols-1 md:grid-cols-3 gap-10">
+          <MumbaiCurrencyFaucet />
         { networkTokens.tokens.map((i,k) => (
           <Token faucetContact={faucetSignerContract} data={i} key={k} index={k} />
         )) }
@@ -74,7 +76,6 @@ export default function Tokens(){
 
   async function setUpFaucetControllerContract(){
     const provider = new ethers.providers.Web3Provider(window.ethereum)
-    // await provider.send("eth_requestAccounts", []);
     const _faucetControllerContract = new ethers.Contract(FaucetControllerAddress, FaucetControllerABI, provider);
     setFaucetContact(_faucetControllerContract)
     setFaucetSignerContract(_faucetControllerContract.connect(provider.getSigner()))
