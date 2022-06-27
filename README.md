@@ -14,8 +14,8 @@
     - Contract Address 0x55aa8D5222112fBcB7aBA3E63e37E9d38e6B535E
     - Owner Address 0xb83E7D21cd4c2f162692bbf2C94f864FEE488965
 
- - [BSC Test Net - FaucetController](https://mumbai.polygonscan.com/address/0x2eFbAa7BC2a3F2c351084469907D493861988980)
-    - Contract Address 0x128e6614252b70225A65088052A686feF7A4FDD0
+ - [BSC Test Net - FaucetController](https://testnet.bscscan.com/address/0x128e6614252b70225a65088052a686fef7a4fdd0)
+    - Contract Address 0x128e6614252b70225a65088052a686fef7a4fdd0
     - Owner Address 0xAb98B2Ea9A58aF064f521505266ece68E634b14b
 
 <br/>
