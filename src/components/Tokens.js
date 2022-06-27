@@ -23,7 +23,7 @@ export default function Tokens(){
   useEffect(() => {
     if(networks.state == 'succeeded'){
       switch (metamask.chainId) {
-        case 8001:
+        case 80001:
           dispatch(fetchMumbaiTokens())
           break;
         case 97:
@@ -87,7 +87,7 @@ export default function Tokens(){
     let FaucetControllerAddress = ''
 
     switch (metamask.chainId) {
-      case 8001:
+      case 80001:
         FaucetControllerAddress = MumbaiFaucetControllerAddress
         break;
       case 97:
