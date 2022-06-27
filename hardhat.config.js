@@ -38,6 +38,14 @@ module.exports = {
       chainId: 80001,
       accounts: { mnemonic: process.env.MNEMONIC}
     },
+    bscTestnet: {
+      url: 'https://data-seed-prebsc-2-s2.binance.org:8545',
+      chainId: 97,
+      accounts: {
+        mnemonic : process.env.MNEMONIC,
+      }
+    },
+
   },
   etherscan: {
     apiKey: {
