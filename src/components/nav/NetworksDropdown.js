@@ -75,7 +75,7 @@ export default function NetworksDropdown(){
 
         <ul className="absolute z-20 p-2 bg-base-100">
           { networks.state == 'succeeded' && network != null && networks.data.map((item,key) => {
-            if(item.chainId === 80001){
+            if(item.chainId === 80001 || item.chainId == 97){
               return (
                 <Link href={item.addChainLink} key={key}>
                   <li className={`flex flex-col mb-2 btn btn-info ${networkStyle(item)}`}>
@@ -111,7 +111,7 @@ export default function NetworksDropdown(){
       return style;
     }
 
-    if(item.chainId == 80001){
+    if(item.chainId == 80001 || item.chainId == 97){
       style += ' text-white btn-info '
       return style;
     }

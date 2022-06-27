@@ -2,14 +2,15 @@ import { useSelector,useDispatch } from 'react-redux';
 import { useEffect,useState } from 'react';
 import { ethers } from "ethers";
 
-import { fetchTokens } from '../slices/tokensSlice';
+import { fetchMumbaiTokens,fetchBscTestNetTokens } from '../slices/tokensSlice';
 
 import Token from './Token.js';
 import MumbaiCurrencyFaucet from './MumbaiCurrencyFaucet';
 import FaucetControllerABI from '../abi/FaucetController.json';
 
 export default function Tokens(){
-  const FaucetControllerAddress = '0x2eFbAa7BC2a3F2c351084469907D493861988980'
+  const MumbaiFaucetControllerAddress = '0x2eFbAa7BC2a3F2c351084469907D493861988980'
+  const BscTestNetFaucetControllerAddress = '0x128e6614252b70225A65088052A686feF7A4FDD0'
   const [networkTokens,setNetworkTokens] = useState(null)
   const [faucetContact,setFaucetContact] = useState(null)
   const [faucetSignerContract,setFaucetSignerContract] = useState(null)
@@ -21,7 +22,14 @@ export default function Tokens(){
 
   useEffect(() => {
     if(networks.state == 'succeeded'){
-      dispatch(fetchTokens())
+      switch (metamask.chainId) {
+        case 8001:
+          dispatch(fetchMumbaiTokens())
+          break;
+        case 97:
+          dispatch(fetchBscTestNetTokens())
+          break;
+      }
     }
   },[networks.state])
 
@@ -61,7 +69,7 @@ export default function Tokens(){
   if(tokens.state == 'succeeded' && networkTokens != null){
     return (
       <div className="py-10 grid grid-cols-1 md:grid-cols-3 gap-10">
-          <MumbaiCurrencyFaucet />
+          {/* <MumbaiCurrencyFaucet /> */}
         { networkTokens.tokens.map((i,k) => (
           <Token faucetContact={faucetSignerContract} data={i} key={k} index={k} />
         )) }
@@ -76,6 +84,17 @@ export default function Tokens(){
 
   async function setUpFaucetControllerContract(){
     const provider = new ethers.providers.Web3Provider(window.ethereum)
+    let FaucetControllerAddress = ''
+
+    switch (metamask.chainId) {
+      case 8001:
+        FaucetControllerAddress = MumbaiFaucetControllerAddress
+        break;
+      case 97:
+        FaucetControllerAddress = BscTestNetFaucetControllerAddress
+        break;
+    }
+
     const _faucetControllerContract = new ethers.Contract(FaucetControllerAddress, FaucetControllerABI, provider);
     setFaucetContact(_faucetControllerContract)
     setFaucetSignerContract(_faucetControllerContract.connect(provider.getSigner()))
