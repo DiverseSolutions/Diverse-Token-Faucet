@@ -23,6 +23,7 @@
 #### Supported Networks
 ---
  - Polygon Mumbai
+ - BSC Test Net
 
 <br/>
 
