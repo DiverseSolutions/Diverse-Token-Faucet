@@ -39,6 +39,7 @@ const metamaskSlice = createSlice({
         state.accountState = 'succeeded'
         state.account = window.ethereum.selectedAddress
         state.chainId = parseInt(window.ethereum.networkVersion)
+        state.haveMetamask = true
         state.accounts = [...action.payload]
       })
       .addCase(fetchMetamaskAccounts.rejected,(state,action) => {
